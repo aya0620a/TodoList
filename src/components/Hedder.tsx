@@ -1,12 +1,10 @@
 import { FC, useContext } from 'react'
 import { menuContext } from '../hooks/menuContext';
 
-
 export const Hedder: FC = () => {
     const { isOpened, setOpened } = useContext(menuContext);
 
     const onClickEvent = () => {
-        //ボタンを押すとisoendの値が変わる
         setOpened(!isOpened);
     };
 

@@ -8,14 +8,18 @@ import supabase from './supabaseClient'
 
 
 const Page: FC = () => {
-    //テキストボックスState
-    const [text, setText] = useState<string>("");
-    //メモ一覧State
-    const [memos, setMemos] = useState<string[]>([]);
-    //メニュー開閉State
+    // //テキストボックスState
+    // const [text, setText] = useState<string>("");
+    // //メモ一覧State
+    // // const [memos, setMemos] = useState<string[]>([]);
+    // //メニュー開閉State
     const [isOpend, setOpend] = useState<boolean>(false);
-    //メモリストの追加時刻を格納するState
-    const [time, setTime] = useState<number>(0);
+    // //メモリストの追加時刻を格納するState
+    // const [time, setTime] = useState<number>(0);
+
+    const [memos, setMemos] = useState<{
+        index: number, text: string, time: string
+    }[]>([]);
 
 
 
@@ -30,8 +34,8 @@ const Page: FC = () => {
                     <Sidebar open={isOpend}/>
                 </div>
                 <div className='flex-1 bg-custom-image pt-20 z-20'>
-                    <InputForm text={text} setText={setText} memos={memos} setMemos={setMemos} time={time} setTime={setTime}/>
-                    <MemoList memos={memos} time={time} setMemos={setMemos} />
+                    <InputForm memos={memos} setMemos={setMemos}/>
+                    <MemoList memos={memos} setMemos={setMemos} />
                 </div>
         </menuContext.Provider>
     </div>
