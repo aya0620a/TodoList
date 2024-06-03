@@ -1,7 +1,7 @@
 import React from 'react';
-import { FC, ChangeEvent } from 'react'
+import { FC, useEffect, ChangeEvent } from 'react'
 import styled from 'styled-components'
-import supabase, { Database } from '../supabaseClient'
+import { fetchTodoList, addTodoItem, checkTodoItem } from '../utils/supabaseFunctions'
 
 type Memo = {
     index: number;
@@ -27,6 +27,22 @@ const SButton = styled.button`
 
 const InputForm: FC<InputFormProps> = (props) => {
     const [inputText, setInputText] = React.useState<string>('');
+
+    useEffect(() => {
+        fetchTodo();
+    }, []);
+
+    // SupabaseによるfetchTodo関数を定義
+    const fetchTodo = async () => {
+        const todoList = (await fetchTodoList()) as Memo[];
+        props.setMemos(todoList);
+    };
+
+    //DBにメモを追加
+    const addTodo = async (memo: Memo) => {
+        if (!memo) return;
+        await addTodoItem(memo);
+        };
 
     //テキストボックス入力時に入力内容をStateに設定
     const onChangeText = (e: ChangeEvent<HTMLInputElement>) => {
@@ -54,7 +70,7 @@ const InputForm: FC<InputFormProps> = (props) => {
             + ('0' + currentDateTime.getHours()).slice(-2) + ':'
             + ('0' + currentDateTime.getMinutes()).slice(-2) + ':'
             + ('0' + currentDateTime.getSeconds()).slice(-2);
-
+            
             //メモの追加
             const newMemo: Memo = {
                 index: props.memos.length,
@@ -64,16 +80,20 @@ const InputForm: FC<InputFormProps> = (props) => {
 
             //既存のメモに新しいメモを追加
             props.setMemos([...props.memos, newMemo]);
+            //DBにメモを追加
+            addTodo(newMemo);
+
             //テキストボックスを空にする
             setInputText('');
 
-            console.log('newMemo', newMemo);
         }
     }
 
     return (
     <div className='flex justify-center mt-20 z-30'>
-        <input type="text" value={inputText} onChange={onChangeText} placeholder="タスク名" className="border-black border-2 w-80 h-11 text-center"></input>
+        <input type="text" value={inputText} onChange={onChangeText} placeholder="タスク名" className=
+        "border-black border-2 w-96 h-12 text-center"
+        ></input>
         <SButton onClick={onClickAdd}>追加</SButton>
     </div>
     )

@@ -4,24 +4,18 @@ import {Hedder} from './components/Hedder'
 import InputForm from './components/InputForm'
 import Sidebar from './components/Sidebar'
 import { menuContext } from './hooks/menuContext'
-import supabase from './supabaseClient'
+import {fetchTodoList, checkTodoItem} from './utils/supabaseFunctions'
 
+type Memo = {
+    index: number;
+    time: string;
+    text: string;
+};
 
 const Page: FC = () => {
-    // //テキストボックスState
-    // const [text, setText] = useState<string>("");
-    // //メモ一覧State
-    // // const [memos, setMemos] = useState<string[]>([]);
-    // //メニュー開閉State
+
     const [isOpend, setOpend] = useState<boolean>(false);
-    // //メモリストの追加時刻を格納するState
-    // const [time, setTime] = useState<number>(0);
-
-    const [memos, setMemos] = useState<{
-        index: number, text: string, time: string
-    }[]>([]);
-
-
+    const [memos, setMemos] = useState<Memo[]>([]);
 
     return (
     <div className='flex'>
@@ -29,7 +23,6 @@ const Page: FC = () => {
             <div className="fixed w-full z-40">
                 <Hedder />
             </div>
-            
                 <div className='fixed w-full z-30'>
                     <Sidebar open={isOpend}/>
                 </div>
