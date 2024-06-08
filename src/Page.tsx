@@ -1,37 +1,70 @@
 import React, {FC, useState, useEffect} from 'react'
-import MemoList from './components/MemoList'
-import {Hedder} from './components/Hedder'
-import InputForm from './components/InputForm'
+import MemoList from './components/Memo/MemoList'
+import {Hedder} from './components/Header/Hedder'
+import InputForm from './components/Memo/InputForm'
 import Sidebar from './components/Sidebar'
 import { menuContext } from './hooks/menuContext'
-import {fetchTodoList, checkTodoItem} from './utils/supabaseFunctions'
+import { fetchTodoList } from './utils/supabaseFunctions'
 
 type Memo = {
     index: number;
     time: string;
     text: string;
+    username: string; //[追加]ユーザ名をStateに設定
 };
+
+type Session = {
+    userId: string;
+    email: string;
+    name: string;
+    iat: number;
+    exp: number;
+}
 
 const Page: FC = () => {
 
     const [isOpend, setOpend] = useState<boolean>(false);
     const [memos, setMemos] = useState<Memo[]>([]);
+    const [session, setSession] = useState<Session | null>(null);   
+    const [username, setUsername] = useState<string>(''); //[追加]ユーザ名をStateに設定
+
+    //ローカルストレージからメールアドレスを取得
+    useEffect(() => {
+        const email = localStorage.getItem('email');
+        if(email){
+            setUsername(email);
+            console.log('email', email);
+            //emailに一致したメモを取得
+            fetchTodoList(email);
+
+            //memosに設定
+            fetchTodoList(email).then((data) => {
+                setMemos(data);
+            });
+        }
+    }
+    ,[]);
+
+
 
     return (
-    <div className='flex'>
-        <menuContext.Provider value={{ isOpened: isOpend, setOpened: setOpend }}>
-            <div className="fixed w-full z-40">
-                <Hedder />
-            </div>
-                <div className='fixed w-full z-30'>
-                    <Sidebar open={isOpend}/>
+        <div className='flex flex-col bg-custom-image'>
+            <menuContext.Provider value={{ isOpened: isOpend, setOpened: setOpend }}>
+                <div className="md:w-full">
+                    <Hedder />
                 </div>
-                <div className='flex-1 bg-custom-image pt-20 z-20'>
-                    <InputForm memos={memos} setMemos={setMemos}/>
-                    <MemoList memos={memos} setMemos={setMemos} />
+                <div className='md:w-full flex flex-row pr-60' >
+                    <div className='md:w-1/4 h-screen'>
+                        <Sidebar open={isOpend} setSession={setSession} />
+                    </div>
+                    <div className='md:w-3/4 pt-20'>
+                        <h1 className='md:text-center md:text-3xl'>{username}さん</h1>
+                        <InputForm memos={memos} setMemos={setMemos} username={username}/>
+                        <MemoList memos={memos} setMemos={setMemos} username={username}/>
+                    </div>
                 </div>
-        </menuContext.Provider>
-    </div>
+            </menuContext.Provider>
+        </div>
     )
 }
 
