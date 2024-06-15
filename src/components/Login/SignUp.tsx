@@ -45,9 +45,9 @@ export default function SignUp() {
 
       {modalOpen && (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-8 rounded">
+          <div className="bg-white p-8 rounded md:w-1/4 md:h-86">
             <h1 className="text-2xl font-semibold text-center">新規登録</h1>
-            <form onSubmit={onSignUp}>
+            <form onSubmit={onSignUp} className='flex flex-col'>
               <input
                 type="email"
                 value={email}
