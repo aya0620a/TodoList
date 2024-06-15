@@ -2,6 +2,7 @@ import supabase from "../../utils/supabaseClient";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import SignUp from "./SignUp";
 
 //ログイン画面のスタイル
 const LoginContainer = styled.div`
@@ -49,9 +50,8 @@ export default function SignIn() {
                     <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" className="w-full px-3 py-2 border border-gray-300 rounded" />
                     <button type="submit" className="w-full py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700">ログイン</button>
                 </form>
-                <div className="text-center mt-4">
-                    <button onClick={() => navgate("/SignUp")} className="text-blue-500 hover:underline">新規登録</button>
-                </div>
+
+                <SignUp/>
             </div>
             </LoginContainer>
     )
