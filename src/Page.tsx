@@ -58,7 +58,7 @@ const Page: FC = () => {
                         <Sidebar open={isOpend} setSession={setSession} />
                     </div>
                     <div className='md:w-3/4 pt-20'>
-                        <h1 className='md:text-center md:text-3xl'>{username}さん</h1>
+                        <h1 className='md:text-center md:text-5xl ml-10'>{username}さん</h1>
                         <InputForm memos={memos} setMemos={setMemos} username={username}/>
                         <MemoList memos={memos} setMemos={setMemos} username={username}/>
                     </div>

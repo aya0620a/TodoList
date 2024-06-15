@@ -22,6 +22,16 @@ const MemoContainer = styled.div`
     padding-top: 1%;
     padding-bottom: 1%;
     z-index: 30;
+
+    @media (max-width: 639px) {
+        display: flex;
+        width: 100%;
+        height: 50px;
+        margin-top: 10%;
+        margin-left: 10%;
+        padding-top: 1%;
+        padding-bottom: 1%;
+    }
 `;
 
 const SButton = styled.button`
@@ -32,6 +42,17 @@ const SButton = styled.button`
     border: none;
     color: #fff;
     border: none;
+
+    @media (max-width: 639px) {
+      display: flex;
+      aline-items: center;
+      align-items: center;
+      padding: 10px;
+      white-space: nowrap;
+      margin-left: 5px;
+      justify-content: center;
+      margin-right: 10px;
+    }
 `;
 
 const MemoList: React.FC<MemoListProps> = ({memos, setMemos, username}) => {
@@ -46,11 +67,11 @@ const MemoList: React.FC<MemoListProps> = ({memos, setMemos, username}) => {
       <MemoContainer>
         <ul className='w-full'>
           {memos && memos.map((memo) => (
-            <li key={memo.index} className="mad:h-20 border-b-2 border-gray-300  bg-gray-200">
+            <li key={memo.index} className="h-15 md:h-20 border-b-2 border-gray-300  bg-gray-200">
               <div className="flex p-2 justify-between">
                 <div className='flex'>
-                  <div className="ml-10 md:text-5xl">・{memo.text}</div>
-                  <div className="ml-10 mt-3 md:text-3xl text-right">{memo.time}</div>
+                  <div className="md:ml-10 md:text-5xl">・{memo.text}</div>
+                  <div className="md:ml-10 mt-3 md:text-3xl text-right">{memo.time}</div>
                 </div>
                 <SButton onClick={() => onClickDelete(memo.index)} className="mr-10 text-xs place-item-center text-red-500">削除</SButton>
               </div>

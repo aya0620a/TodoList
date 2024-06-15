@@ -25,6 +25,17 @@ const InputContainer = styled.div`
     padding-top: 1%;
     padding-bottom: 1%;
     z-index: 30;
+
+    @media (max-width: 639px) {
+        display: flex;
+        width: 100%;
+        height: 50px;
+        margin-top: 10%;
+        margin-left: 10%;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        
+    }
 `;
 
 const SButton = styled.button`
@@ -35,6 +46,18 @@ const SButton = styled.button`
     background-color: #008080;
     border-radius: 50px;
     color: #fff;
+
+    @media (max-width: 639px) {
+        display: flex;
+        padding: 15px;
+        width: 50%;
+        height: 50%;
+        margin-left: 3%;
+        margin-top: 2%;
+        white-space: nowrap;
+        justify-content: center;
+        align-items: center;
+    }
 `;
 
 
@@ -103,7 +126,7 @@ const InputForm: FC<InputFormProps> = (props) => {
     <div>
         <InputContainer>
             <input type="text" value={inputText} onChange={onChangeText} placeholder="タスク名" className=
-            "border-black border-2 md:w-5/6  md:text-5xl text-center"
+            "border-black border-2 ml-20 h-10 sm:text-2xl md:w-5/6 md:h-full md:text-5xl text-center"
             ></input>
             <SButton onClick={onClickAdd}>追加</SButton>
         </InputContainer>
