@@ -54,6 +54,7 @@ export default function SignUp() {
                 onChange={e => setEmail(e.target.value)}
                 placeholder="Email"
                 required 
+                className='mt-4'
               />
               <input
                 type="password"
@@ -61,6 +62,7 @@ export default function SignUp() {
                 onChange={e => setPassword(e.target.value)}
                 placeholder="Password"
                 required
+                className='mt-4'
               />
               <input
                 type="password"
@@ -68,6 +70,7 @@ export default function SignUp() {
                 onChange={e => setPasswordConf(e.target.value)}
                 placeholder="Confirm Password"
                 required
+                className='mt-4'
               />
               <button type="submit" className=' hover:bg-red-700 font-bold py-2 px-4 rounded mt-4 ml-4'>認証メールを送信</button>
             </form>
