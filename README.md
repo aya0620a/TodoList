@@ -1,4 +1,25 @@
-# Getting Started with Create React App
+# TodoListアプリ
+
+## 詳細
+
+最初のページで新規登録をしていなければ登録をして、登録したアカウントでログインをします。supabaseのデータベースからメールアドレスに一致したデータを取得して表示しています。
+
+タスクを追加するとデータを追加した時間が表示され、完了したら削除ボタンでデータを削除することが出来ます。時間に余裕が出来たら、タスクの絞りこみやリマインド機能などを実装しようと考えています。
+
+<注意>無料で作成しているため、一定時間にログインできる数や、データベースに追加できる数などが制限されていますがご了承ください。
+
+PCとスマホ画面を想定してレスポンシブデザインに対応させています。
+
+## 使用言語・技術
+
+- React
+- TypeScript
+- tailwindcss
+- styled-componet
+- supabase
+- vercel
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
