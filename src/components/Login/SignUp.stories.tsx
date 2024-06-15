@@ -2,8 +2,8 @@ import SignUp from "./SignUp";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 export default {
-  title: "Login/SignUp",
-  component: SignUp,
+    title: "Login/SignUp",
+    component: SignUp,
 };
 
 export const SignUpForm = () => {
